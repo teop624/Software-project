@@ -37,7 +37,7 @@ def main():
     app = Main(root)
     root.title("Library Management System")
     root.geometry("1350x750+350+200")
-    root.iconbitmap('icons/book.png')
+    root.iconbitmap('icons/book.ico')
     root.mainloop()
 
 if __name__ == '__main__':
