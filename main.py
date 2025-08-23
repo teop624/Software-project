@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import PhotoImage
 import sqlite3
+import addBook
 
 
 con = sqlite3.connect('Libarary.db')
@@ -61,7 +62,7 @@ class Main(object):
         self.lblImg.grid(row = 1)
         #add book
         self.iconbook=PhotoImage(file='icons/addbook.png')
-        self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 100, height = 40)
+        self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 100, height = 40, command = self.addBook)
         self.btnbook.pack(side = LEFT, padx = 10)
         #add member
         self.iconmember = PhotoImage(file = 'icons/users.png')
@@ -101,6 +102,9 @@ class Main(object):
         self.lbl_member_count.grid(row = 1, sticky = W)
         self.lbl_taken_count = Label(self.tab2, text = '', pady = 20, font = 'verdana 14 bold')
         self.lbl_taken_count.grid(row = 2, sticky = W)
+
+    def addBook(self):
+        add = addBook.AddBook
 
 
 
