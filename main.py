@@ -29,7 +29,18 @@ class Main(object):
         list_bar = LabelFrame(centerRightFrame, width = 440, height = 175, text = 'list', bg = '#fcc324')
         list_bar.pack(fill = BOTH)
         #add book
-        
+        self.iconbook=PhotoImage(file='icons/addbook.png')
+        self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold')
+        self.btnbook.pack(side = LEFT, padx = 10)
+        #add member
+        self.iconmember = PhotoImage(file = 'icons/users.png')
+        self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10)
+        self.btnmember. configure(image = self.iconmember, compound = LEFT)
+        self.btnmember.pack(side = LEFT)
+        #give book
+        self.icongive=PhotoImage(file = 'icons/givebook.png')
+        self.btngive = Button(topFrame, text = 'Give Book', font = 'arial 12 bold', padx = 10, image = self.icongive)
+        self.btngive.pack(side = LEFT)
 
 
 
