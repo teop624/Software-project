@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import PhotoImage
 
 class Main(object):
     def __init__(self,master):
