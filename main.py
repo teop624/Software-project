@@ -1,6 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import PhotoImage
+import sqlite3
+
+
+con = sqlite3.connect('Libarary.db')
+cur = con.cursor()
 
 class Main(object):
     def __init__(self,master):

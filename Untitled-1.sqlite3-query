@@ -1,0 +1,11 @@
+-- database: ./Libarary.db
+
+CREATE TABLE 'borrows' (
+    'borrowID' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'bookID' INTEGER NOT NULL,
+    'memberID' INTEGER NOT NULL,
+    'borrowDate' TEXT NOT NULL,
+    'returnDate' TEXT,
+    FOREIGN KEY (bookID) REFERENCES books(bookID),
+    FOREIGN KEY (memberID) REFERENCES members(memberID)
+);
