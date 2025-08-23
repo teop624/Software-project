@@ -23,7 +23,7 @@ class Main(object):
         centerRightFrame.pack(side = RIGHT)
 
         #search
-        search_bar = LabelFrame(centerRightFrame, width = 440, height = 175, text = 'search', bg = '#9bc9ff')
+        search_bar = LabelFrame(centerRightFrame, width = 440, height = 75, text = 'search', bg = '#9bc9ff')
         search_bar.pack(fill = BOTH)
         self.lbl_search = Label(search_bar, text = 'Search Book', font = 'arial 12 bold', bg = '#9bc9ff', fg = 'white')
         self.lbl_search.grid(row = 0, column = 0, padx = 20, pady = 10)
@@ -43,6 +43,17 @@ class Main(object):
         rb1.grid(row = 1, column = 0)
         rb2.grid(row = 1, column = 1)
         rb3.grid(row = 1, column = 2)
+        btn_list = Button(list_bar, text = 'List Books', bg = '#2488ff', fg = 'white', font = 'arial 12')
+        btn_list.grid(row = 1, column = 3, padx = 40, pady = 10)
+
+        #title
+        image_bar = Frame(centerRightFrame, width = 440, height = 350)
+        image_bar.pack(fill = BOTH)
+        self.title_right = Label(image_bar, text = 'Welcom to our Library', font = 'arial 16 bold')
+        self.title_right.grid(row = 0)
+        self.img_library = PhotoImage(file = 'icons/library.png')
+        self.lblImg = Label(image_bar, image = self.img_library)
+        self.lblImg.grid(row = 1)
         #add book
         self.iconbook=PhotoImage(file='icons/addbook.png')
         self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 100, height = 40)
@@ -56,6 +67,24 @@ class Main(object):
         self.icongive=PhotoImage(file = 'icons/givebook.png')
         self.btngive = Button(topFrame, text = 'Give Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40)
         self.btngive.pack(side = LEFT)
+
+        #tabs
+        self.tabs = ttk.Notebook(centerLeftFrame, width = 900, height = 600)
+        self.tabs.pack()
+        self.tab1_icon = PhotoImage(file = 'icons/books.png')
+        self.tab2_icon = PhotoImage(file = 'icons/members.png')
+        self.tab1 = ttk.Frame(self.tabs)
+        self.tab2 = ttk.Frame(self.tabs)
+        self.tabs.add(self.tab1, text = 'Library Management', image = self.tab1_icon, compound = LEFT)
+        self.tabs.add(self.tab2, text = 'Statistics', image = self.tab2_icon, compound = LEFT)
+
+        #list books
+        self.list_books = Listbox(self.tab1, width = 40, height = 30, bd = 5, font = 'times 12 bold')
+        self.sb = Scrollbar(self.tab1, orient = VERTICAL)
+        self.list_books.grid(row = 0, column = 0, padx = (10,0), pady = 10, sticky = N)
+        self.sb.config(command = self.list_books.yview)
+        self.list_books.config(yscrollcommand = self.sb.set)
+        self.sb.grid(row = 0, column = 0, sticky = N+S+E)
 
 
 
