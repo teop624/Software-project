@@ -85,6 +85,17 @@ class Main(object):
         self.sb.config(command = self.list_books.yview)
         self.list_books.config(yscrollcommand = self.sb.set)
         self.sb.grid(row = 0, column = 0, sticky = N+S+E)
+        #list details
+        self.list_details = Listbox(self.tab1, width = 80, height = 30, bd = 5, font = 'times 12 bold')
+        self.list_details.grid(row = 0, column = 1, padx = (10,0), pady = 10, sticky = N)
+
+        #statistics
+        self.lbl_book_count = Label(self.tab2, text = '', pady = 20, font = 'verdana 14 bold')
+        self.lbl_book_count.grid(row = 0)
+        self.lbl_member_count = Label(self.tab2, text = '', pady = 20, font = 'verdana 14 bold')
+        self.lbl_member_count.grid(row = 1, sticky = W)
+        self.lbl_taken_count = Label(self.tab2, text = '', pady = 20, font = 'verdana 14 bold')
+        self.lbl_taken_count.grid(row = 2, sticky = W)
 
 
 
