@@ -38,8 +38,12 @@ def main():
     app = Main(root)
     root.title("Library Management System")
     root.geometry("1350x750+350+200")
-    root.iconbitmap('icons/book.ico')
-    root.mainloop()
+    try: #ai code
+        app_icon = PhotoImage(file='icons/book.png') 
+        root.iconphoto(False, app_icon)
+    except Exception as e:
+        print(f"Failed to load icon: {e}") 
+    root.mainloop() #not aicode
 
 if __name__ == '__main__':
     main()
