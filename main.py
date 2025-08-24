@@ -12,6 +12,13 @@ class Main(object):
     def __init__(self,master):
         self.master = master
 
+        def displayBooks(self):
+            books = cur.execute("SELECT * FROM 'books'").fetchall()
+
+            for book in books:
+                print(book)
+
+
         #frames
         mainFrame=Frame(self.master)
         mainFrame.pack()
@@ -102,6 +109,8 @@ class Main(object):
         self.lbl_member_count.grid(row = 1, sticky = W)
         self.lbl_taken_count = Label(self.tab2, text = '', pady = 20, font = 'verdana 14 bold')
         self.lbl_taken_count.grid(row = 2, sticky = W)
+        #functions
+        displayBooks(self)
 
     def addBook(self):
         add = addBook.AddBook()
