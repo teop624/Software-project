@@ -29,7 +29,7 @@ class AddMember(Toplevel):
         self.lbl_name = Label(self.bottomFrame, text = 'Name', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_name.place(x = 40, y = 40)
         self.ent_name = Entry(self.bottomFrame, width = 30, bd = 4)
-        self.ent_name.insert(0, 'Enter Member Name')
+        self.ent_name.insert(0, 'Enter Name')
         self.ent_name.place(x = 150, y = 45)
         #email
         self.lbl_email = Label(self.bottomFrame, text = 'Email', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
@@ -48,7 +48,7 @@ class AddMember(Toplevel):
         button = Button(self.bottomFrame, text = 'Add Member', command = self.addMember)
         button.place(x = 270, y = 200)
 
-    def addBook(self):
+    def addMember(self):
         name = self.ent_name.get()
         email = self.ent_email.get()
         phone = self.ent_phone.get()
