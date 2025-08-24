@@ -12,7 +12,7 @@ class Main(object):
     def __init__(self,master):
         self.master = master
 
-        def displayStatistics(self):
+        def displayStatistics(evt):
             count_books = cur.execute("SELECT count(bookID) FROM books").fetchall()
             count_members = cur.execute("SELECT count(memberID) FROM members").fetchall()
             taken_books = cur.execute("SELECT count(status) FROM books WHERE status =?", (1,)).fetchall()
@@ -21,9 +21,12 @@ class Main(object):
             self.lbl_member_count.config(text = str(count_members[0][0]) + ' members')
             self.lbl_taken_count.config(text = str(taken_books[0][0]) + ' books are borrowed')
 
+
         def displayBooks(self):
             books = cur.execute("SELECT * FROM 'books'").fetchall()
             count = 0
+
+            self.list_books.delete(0,END)
             for book in books:
                 print(book)
                 self.list_books.insert(count,str(book[0]) + "-" + book[1])
@@ -47,7 +50,14 @@ class Main(object):
                     self.list_details.insert(4,"Not Available")
                     self.list_details.itemconfig(4, bg = 'white', fg = 'red')
 
+            def doubleClick(evt):
+                value = str(self.list_books.get(self.list_books.curselection()))
+                print(value)
+
             self.list_books.bind('<<ListboxSelect>>', bookInfo)
+            self.tabs.bind('<<NotebookTabChanged>>', displayStatistics)
+            #self.tabs.bind('<ButtonRelease-1>', displayBooks)
+            self.list_books.bind('<Double-Button-1>', doubleClick)
         #frames
         mainFrame=Frame(self.master)
         mainFrame.pack()
