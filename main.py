@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import PhotoImage
 import sqlite3
-import addBook
+import addBook, addMember
 
 
 con = sqlite3.connect('Libarary.db')
@@ -66,7 +66,7 @@ class Main(object):
         self.btnbook.pack(side = LEFT, padx = 10)
         #add member
         self.iconmember = PhotoImage(file = 'icons/users.png')
-        self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 100, height = 40)
+        self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 100, height = 40, command = self.addMember)
         self.btnmember. configure(image = self.iconmember, compound = LEFT)
         self.btnmember.pack(side = LEFT)
         #give book
@@ -106,7 +106,8 @@ class Main(object):
     def addBook(self):
         add = addBook.AddBook()
 
-
+    def addMember(self):
+        member = addMember.AddMember()
 
 def main():
     root = Tk()
