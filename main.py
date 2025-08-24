@@ -73,7 +73,7 @@ class Main(object):
         list_bar.pack(fill = BOTH)
 
         lbl_list = Label(list_bar, text = 'Sort by', font = 'times 16 bold', fg = '#2488ff', bg = '#fcc324')
-        lbl_list.grid(row = 0, column = 2)
+        lbl_list.grid(row = 0, column = 2, columnspan = 2)
 
         self.listChoice = IntVar()
         rb1 = Radiobutton(list_bar, text = 'All Books', var = self.listChoice, value = 1, bg = '#fcc324')
