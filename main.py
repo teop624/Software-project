@@ -20,7 +20,25 @@ class Main(object):
                 self.list_books.insert(count,str(book[0])+"-"+book[1])
                 count += 1
 
+            def bookInfo(evt):
+                value = str(self.list_books.get(self.list_books.curselection()))
+                id = value.split('-')[0]
+                book = cur.execute("SELECT * FROM books WHERE bookID = ?",(id))
+                book_info = book.fetchall()
+                print(book_info)
+                self.list_details.delete(0,END)
+                self.list_details.insert(0,"Book Name " + book_info[0][1])
+                self.list_details.insert(1,"Author " + book_info[0][2])
+                self.list_details.insert(2,"No. of Pages " + str(book_info[0][3]))
+                self.list_details.insert(3, str(book_info[0][4]))
+                if book_info[0][5] == 0:
+                    self.list_details.insert(4,"Available")
+                    self.list_details.itemconfig(4, bg = 'white', fg = 'green')
+                else:
+                    self.list_details.insert(4,"Not Available")
+                    self.list_details.itemconfig(4, bg = 'white', fg = 'red')
 
+            self.list_books.bind('<<ListboxSelect>>', bookInfo)
         #frames
         mainFrame=Frame(self.master)
         mainFrame.pack()
@@ -38,13 +56,13 @@ class Main(object):
         centerRightFrame.pack(side = RIGHT)
 
         #search
-        search_bar = LabelFrame(centerRightFrame, width = 440, height = 75, text = 'search', bg = '#9bc9ff')
+        search_bar = LabelFrame(centerRightFrame, width = 500, height = 75, text = 'search', bg = '#9bc9ff')
         search_bar.pack(fill = BOTH)
         self.lbl_search = Label(search_bar, text = 'Search Book', font = 'arial 12 bold', bg = '#9bc9ff', fg = 'white')
         self.lbl_search.grid(row = 0, column = 0, padx = 20, pady = 10)
         self.ent_search = Entry(search_bar, width = 30, bd = 10)
         self.ent_search.grid(row = 0, column = 1, columnspan = 3, padx = 10, pady = 10)
-        self.btn_search = Button(search_bar, text = 'Search', font = 'arial 12', bg = '#fcc324', fg = 'white')
+        self.btn_search = Button(search_bar, text = 'Search', font = 'arial 12', bg = '#fcc324', fg = 'white', command = self.searchBooks)
         self.btn_search.grid(row = 0, column = 4, padx = 20, pady = 10)
         #list 
         list_bar = LabelFrame(centerRightFrame, width = 440, height = 175, text = 'list', bg = '#fcc324')
@@ -120,6 +138,11 @@ class Main(object):
     def addMember(self):
         member = addMember.AddMember()
 
+    def searchBooks(self):
+        value = self.ent_search.get()
+        search = cur.execute("SELECT * FROM books WHERE bookName LIKE ?", ('%'+value+'%',)).fetchall()
+        print(search)
+        self.list_books.delete(0,END)
 def main():
     root = Tk()
     app = Main(root)
