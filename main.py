@@ -51,13 +51,16 @@ class Main(object):
                     self.list_details.itemconfig(4, bg = 'white', fg = 'red')
 
             def doubleClick(evt):
+                global given_id
                 value = str(self.list_books.get(self.list_books.curselection()))
-                print(value)
+                given_id = value.split('-')[0]
+                give_book = GiveBook()
 
             self.list_books.bind('<<ListboxSelect>>', bookInfo)
             self.tabs.bind('<<NotebookTabChanged>>', displayStatistics)
             #self.tabs.bind('<ButtonRelease-1>', displayBooks)
             self.list_books.bind('<Double-Button-1>', doubleClick)
+
         #frames
         mainFrame=Frame(self.master)
         mainFrame.pack()
@@ -200,6 +203,30 @@ class Main(object):
             for book in taken_books:
                 self.list_books.insert(count, str(book[0]) + "-" + book[1])
                 count += 1
+
+class GiveBook(Toplevel):
+    def __init__(self):
+        Toplevel.__init__(self)
+        self.geometry("400x400+600+250")
+        self.title("Give Book")
+        self.resizable(False,False)
+        global given_id
+        self.book_id = int(given_id)
+        print(type(given_id))
+
+
+        #top frame
+        self.topFrame = Frame(self, height = 150, bg = 'white')
+        self.topFrame.pack(fill = X)
+        #bottom frame
+        self.bottomFrame = Frame(self, height = 600, bg = '#fcc324')
+        self.bottomFrame.pack(fill = X)
+        #heading, image & date
+        self.top_image = PhotoImage(file = 'icons/givebook.png')
+        top_image_lbl = Label(self.topFrame, image = self.top_image, bg = 'white')
+        top_image_lbl.place(x = 120, y = 10)
+        heading = Label(self.topFrame, text = 'Give Book', font = 'arial 22 bold', bg = 'white', fg = '#003f8a')
+        heading.place(x = 200, y = 60)
 
 def main():
     root = Tk()
