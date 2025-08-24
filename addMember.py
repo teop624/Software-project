@@ -46,7 +46,7 @@ class AddMember(Toplevel):
 
         #button
         button = Button(self.bottomFrame, text = 'Add Member', command = self.addMember)
-        button.place(x = 270, y = 200)
+        button.place(x = 270, y = 120)
 
     def addMember(self):
         name = self.ent_name.get()
