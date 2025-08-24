@@ -35,3 +35,21 @@ class AddBook(Toplevel):
         self.ent_author = Entry(self.bottomFrame, width = 30, bd = 4)
         self.ent_author.insert(0, 'Enter Author Name')
         self.ent_author.place(x = 150, y = 85)
+        #page
+        self.lbl_page = Label(self.bottomFrame, text = 'No. of Pages', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_page.place(x = 40, y = 120)
+        self.ent_page = Entry(self.bottomFrame, width = 30, bd = 4)
+        self.ent_page.insert(0, 'Enter No. of Pages')
+        self.ent_page.place(x = 150, y = 125)
+        #language
+        self.lbl_language = Label(self.bottomFrame, text = 'Language', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_language.place(x = 40, y = 160)
+        self.ent_language = Entry(self.bottomFrame, width = 30, bd = 4)
+        self.ent_language.insert(0, 'Enter Language')
+        self.ent_language.place(x = 150, y = 165)
+        #button
+        button = Button(self.bottomFrame, text = 'Add Book', command = self.addBook)
+        button.place(x = 270, y = 200)
+
+    def addBook(self):
+        pass
