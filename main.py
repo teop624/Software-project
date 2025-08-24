@@ -13,7 +13,13 @@ class Main(object):
         self.master = master
 
         def displayStatistics(self):
-            pass
+            count_books = cur.execute("SELECT count(bookID) FROM books").fetchall()
+            count_members = cur.execute("SELECT count(memberID) FROM members").fetchall()
+            taken_books = cur.execute("SELECT count(status) FROM books WHERE status =?", (1,)).fetchall()
+            print(count_books)
+            self.lbl_book_count.config(text = str(count_books[0][0]) + ' books in library')
+            self.lbl_member_count.config(text = str(count_members[0][0]) + ' members')
+            self.lbl_taken_count.config(text = str(taken_books[0][0]) + ' books are borrowed')
 
         def displayBooks(self):
             books = cur.execute("SELECT * FROM 'books'").fetchall()
@@ -139,6 +145,7 @@ class Main(object):
 
         #functions
         displayBooks(self)
+        displayStatistics(self)
 
     def addBook(self):
         add = addBook.AddBook()
