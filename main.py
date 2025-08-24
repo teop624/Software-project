@@ -33,6 +33,8 @@ class Main(object):
                 count += 1
 
             def bookInfo(evt):
+                if not self.list_books.curselection():
+                    return
                 value = str(self.list_books.get(self.list_books.curselection()))
                 id = value.split('-')[0]
                 book = cur.execute("SELECT * FROM books WHERE bookID = ?",(id))
@@ -210,6 +212,10 @@ class GiveBook(Toplevel):
         self.geometry("400x400+600+250")
         self.title("Give Book")
         self.resizable(False,False)
+        self.topFrame = Frame(self, height = 150, bg = 'white')
+        self.topFrame.pack(fill = X)
+        self.bottomFrame = Frame(self, height = 600, bg = '#fcc324')
+        self.bottomFrame.pack(fill = X)
         global given_id
         self.book_id = int(given_id)
         query = "SELECT * FROM books"
@@ -224,6 +230,12 @@ class GiveBook(Toplevel):
         for member in members:
             member_list.append(str(member[0]) + '-' + member[1])
 
+        #heading, image & date
+        self.top_image = PhotoImage(file = 'icons/givebook.png')
+        top_image_lbl = Label(self.topFrame, image = self.top_image, bg = 'white')
+        top_image_lbl.place(x = 120, y = 10)
+        heading = Label(self.topFrame, text = 'Give Book', font = 'arial 22 bold', bg = 'white', fg = '#003f8a')
+        heading.place(x = 200, y = 60)
 
         #book name
         self.book_name = StringVar()
@@ -231,22 +243,19 @@ class GiveBook(Toplevel):
         self.lbl_name.place(x = 40, y = 40)
         self.combo_name = ttk.Combobox(self.bottomFrame, textvariable = self.book_name)
         self.combo_name['values'] = book_list
+        self.combo_name.current(self.book_id - 1)
         self.combo_name.place(x = 150, y = 45)
         #member name
         self.member_name = StringVar()
         self.lbl_member = Label(self.bottomFrame, text = 'Member Name', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_member.place(x = 40, y = 80)
         self.combo_member = ttk.Combobox(self.bottomFrame, textvariable = self.member_name)
+        self.combo_member['values'] = member_list
         self.combo_member.place(x = 150, y = 85)
         #button
         button = Button(self.bottomFrame, text = 'Give Book', command = self.giveBook)
         button.place(x = 150, y = 120)
-        #heading, image & date
-        self.top_image = PhotoImage(file = 'icons/givebook.png')
-        top_image_lbl = Label(self.topFrame, image = self.top_image, bg = 'white')
-        top_image_lbl.place(x = 120, y = 10)
-        heading = Label(self.topFrame, text = 'Give Book', font = 'arial 22 bold', bg = 'white', fg = '#003f8a')
-        heading.place(x = 200, y = 60)
+
 
 def main():
     root = Tk()
