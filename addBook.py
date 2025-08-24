@@ -44,10 +44,10 @@ class AddBook(Toplevel):
         self.ent_page.insert(0, 'Enter No. of Pages')
         self.ent_page.place(x = 150, y = 125)
         #year
-        self.lbl_year = Label(self.bottomFrame, text = 'Language', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_year = Label(self.bottomFrame, text = 'Year', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_year.place(x = 40, y = 160)
         self.ent_year = Entry(self.bottomFrame, width = 30, bd = 4)
-        self.ent_year.insert(0, 'Enter Language')
+        self.ent_year.insert(0, 'Enter Year')
         self.ent_year.place(x = 150, y = 165)
         #button
         button = Button(self.bottomFrame, text = 'Add Book', command = self.addBook)

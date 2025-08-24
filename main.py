@@ -14,9 +14,11 @@ class Main(object):
 
         def displayBooks(self):
             books = cur.execute("SELECT * FROM 'books'").fetchall()
-
+            count = 0
             for book in books:
                 print(book)
+                self.list_books.insert(count,str(book[0])+"-"+book[1])
+                count += 1
 
 
         #frames
