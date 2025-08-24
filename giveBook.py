@@ -20,7 +20,7 @@ class GiveBook(Toplevel):
 
         self.book_id = int(book_id)
 
-        query = "SELECT * FROM books WHERE status = 0"
+        query = "SELECT * FROM books"
         books = cur.execute(query).fetchall()
         book_list = []
         for book in books:
@@ -41,6 +41,9 @@ class GiveBook(Toplevel):
         self.combo_name['values'] = book_list
         self.combo_name.current(self.book_id - 1)
         self.combo_name.place(x = 150, y = 45)
+        self.lbl_availability = Label(self.bottomFrame, text="", font='arial 12 bold', bg='#fcc324')
+        self.lbl_availability.place(x=300, y=45)
+        self.combo_name.bind("<<ComboboxSelected>>", self.update_availability)
         #member name
         self.member_name = StringVar()
         self.lbl_member = Label(self.bottomFrame, text = 'Member Name', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
@@ -87,3 +90,17 @@ class GiveBook(Toplevel):
 
         else:
             messagebox.showerror("Error", "Please fill all the details", icon = 'warning')
+    
+   
+    def update_availability(self, event=None):
+        selected_book_string = self.combo_name.get()
+        if selected_book_string:
+            book_id = int(selected_book_string.split('-')[0])
+        
+            cur.execute("SELECT status FROM books WHERE bookID = ?", (book_id,))
+            book_status = cur.fetchone()[0]
+        
+            if book_status == 0:
+                self.lbl_availability.config(text="Available", fg="green")
+            else:
+                self.lbl_availability.config(text="Not Available", fg="red")

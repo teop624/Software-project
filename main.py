@@ -125,9 +125,9 @@ class Main(object):
         self.btnmember. configure(image = self.iconmember, compound = LEFT)
         self.btnmember.pack(side = LEFT)
         #give book
-        self.icongive=PhotoImage(file = 'icons/givebook.png')
-        self.btngive = Button(topFrame, text = 'Give Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40)
-        self.btngive.pack(side = LEFT)
+       # self.icongive=PhotoImage(file = 'icons/givebook.png')
+      #  self.btngive = Button(topFrame, text = 'Give Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40, command = self.open_give_book)
+       # self.btngive.pack(side = LEFT)
 
 
         #tabs
@@ -207,6 +207,8 @@ class Main(object):
             for book in taken_books:
                 self.list_books.insert(count, str(book[0]) + "-" + book[1])
                 count += 1
+    #def open_give_book(self):
+     #   GiveBook()
 
 
 def main():
