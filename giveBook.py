@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import Toplevel
 from tkinter import messagebox
 from tkinter import ttk
+import datetime
 import sqlite3
 con = sqlite3.connect('Libarary.db')
 cur = con.cursor()
@@ -67,16 +68,22 @@ class GiveBook(Toplevel):
     def giveBook(self):
         book_name = self.book_name.get()
         member_name = self.member_name.get()
-        date = self.date.get()
-
-        if(book_name and member_name and date !=''):
-            
+   
+        if (book_name and member_name !=''):
+            book_id = book_name.split('-')[0]
+            member_id = member_name.split('-')[0]
+            cur.execute("SELECT status FROM books WHERE bookID = ?", (book_id,))
+            book_status = cur.fetchone()[0]
+            if book_status == 1:
+                messagebox.showerror("Error", "Book is already issued", icon = 'warning')
+                return
+            date = datetime.date.today().strftime('%Y-%m-%d')
             query = "INSERT INTO 'borrows' (bookID, memberID, borrowDate) VALUES(?,?,?)"
-            cur.execute(query,(book_name, member_name, date))
-            con.commit()
-            messagebox.showinfo('Success', 'Book Borrowed Successfully', icon = 'info')
             cur.execute("UPDATE books SET status =? WHERE bookID =?", (1, self.book_id))
             con.commit()
+            messagebox.showinfo('Success', 'Book Borrowed Successfully', icon = 'info')
             self.destroy()
+            
 
-        else:messagebox.showerror("Error", "Please fill all the details", icon = 'warning')
+        else:
+            messagebox.showerror("Error", "Please fill all the details", icon = 'warning')
