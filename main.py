@@ -4,6 +4,7 @@ from tkinter import PhotoImage
 from tkinter import messagebox
 import sqlite3
 import addBook, addMember, giveBook
+from giveBook import *
 
 
 con = sqlite3.connect('Libarary.db')
@@ -57,7 +58,7 @@ class Main(object):
                 global given_id
                 value = str(self.list_books.get(self.list_books.curselection()))
                 given_id = value.split('-')[0]
-                give_book = GiveBook()
+                give_book = GiveBook(given_id)
 
             self.list_books.bind('<<ListboxSelect>>', bookInfo)
             self.tabs.bind('<<NotebookTabChanged>>', displayStatistics)

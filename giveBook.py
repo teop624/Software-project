@@ -12,12 +12,13 @@ class GiveBook(Toplevel):
         self.geometry("400x400+600+250")
         self.title("Give Book")
         self.resizable(False,False)
+        global given_id
+        self.book_id = int(given_id)
         self.topFrame = Frame(self, height = 150, bg = 'white')
         self.topFrame.pack(fill = X)
         self.bottomFrame = Frame(self, height = 600, bg = '#fcc324')
         self.bottomFrame.pack(fill = X)
-        global given_id
-        self.book_id = int(given_id)
+
 
         query = "SELECT * FROM books WHERE status = 0"
         books = cur.execute(query).fetchall()
