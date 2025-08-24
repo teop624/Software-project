@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import Toplevel
 from tkinter import messagebox
 import sqlite3
+con = sqlite3.connect('Libarary.db')
+cur = con.cursor()
 
 class AddBook(Toplevel):
     def __init__(self):
@@ -52,4 +54,21 @@ class AddBook(Toplevel):
         button.place(x = 270, y = 200)
 
     def addBook(self):
-        pass
+        name = self.ent_name.get()
+        author = self.ent_author.get()
+        page = self.ent_page.get()
+        language = self.ent_language.get()
+
+        if name and author and page and language !='':
+            try:
+                query = "INSERT INTO 'books' (bookName, bookAuthor, pageCount, language) VALUES(?,?,?,?)"
+                cur.execute(query, (name, author, page, language))
+                con.commit()
+                messagebox.showinfo('Success', 'Book added successfully', icon = 'info')
+
+            except:
+                messagebox.showerror('Error', 'Cannot add data to Database', icon = 'error')
+        
+        else:
+            messagebox.showerror('Error', 'Please fill all the fields', icon = 'warning')
+                
