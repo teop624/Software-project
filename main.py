@@ -104,7 +104,7 @@ class Main(object):
         self.lbl_taken_count.grid(row = 2, sticky = W)
 
     def addBook(self):
-        add = addBook.AddBook
+        add = addBook.AddBook()
 
 
 
