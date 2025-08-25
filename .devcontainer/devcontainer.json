@@ -1,0 +1,17 @@
+{
+  "name": "Python with GUI",
+  "image": "mcr.microsoft.com/devcontainers/python:0-3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "vscode",
+      "webPort": "6080"
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y python3-tk",
+  "portsAttributes": {
+    "6080": {
+      "label": "Desktop",
+      "onAutoForward": "openBrowserOnce"
+    }
+  }
+}
