@@ -98,7 +98,7 @@ class Main(object):
         lbl_list.grid(row = 0, column = 2, columnspan = 2)
         self.listChoice = IntVar()
         rb1 = Radiobutton(list_bar, text = 'All Books', var = self.listChoice, value = 1, bg = '#fcc324')
-        rb2 = Radiobutton(list_bar, text = 'Acailable Books', var = self.listChoice, value = 2, bg = '#fcc324')
+        rb2 = Radiobutton(list_bar, text = 'Available Books', var = self.listChoice, value = 2, bg = '#fcc324')
         rb3 = Radiobutton(list_bar, text = 'Borrowed Books', var = self.listChoice, value = 3, bg = '#fcc324')
         rb1.grid(row = 1, column = 0)
         rb2.grid(row = 1, column = 1)
@@ -108,7 +108,7 @@ class Main(object):
         #title
         image_bar = Frame(centerRightFrame, width = 440, height = 350)
         image_bar.pack(fill = BOTH)
-        self.title_right = Label(image_bar, text = 'Welcom to our Library', font = 'arial 16 bold')
+        self.title_right = Label(image_bar, text = 'Welcome to our Library', font = 'arial 16 bold')
         self.title_right.grid(row = 0)
         self.img_library = PhotoImage(file = 'icons/library.png')
         self.lblImg = Label(image_bar, image = self.img_library)
