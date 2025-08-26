@@ -62,7 +62,9 @@ class AddMember(Toplevel):
 
             except:
                 messagebox.showerror('Error', 'Cannot add data to Database', icon = 'error')
-        
+
+
         else:
             messagebox.showerror('Error', 'Please fill all the fields', icon = 'warning')
+        
                 

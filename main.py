@@ -50,9 +50,11 @@ class Main(object):
                 if book_info[0][5] == 0:
                     self.list_details.insert(4,"Available")
                     self.list_details.itemconfig(4, bg = 'white', fg = 'green')
+                    self.list_details.insert(5, "Borrowed by Nobody")
                 else:
                     self.list_details.insert(4,"Not Available")
                     self.list_details.itemconfig(4, bg = 'white', fg = 'red')
+                    self.list_details.insert(5, "Borrowed by " + str(book_info[0][6]))
 
             def doubleClick(evt):
                 global given_id
@@ -124,10 +126,10 @@ class Main(object):
         self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 100, height = 40, command = self.addMember)
         self.btnmember. configure(image = self.iconmember, compound = LEFT)
         self.btnmember.pack(side = LEFT)
-        #give book
-       # self.icongive=PhotoImage(file = 'icons/givebook.png')
-      #  self.btngive = Button(topFrame, text = 'Give Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40, command = self.open_give_book)
-       # self.btngive.pack(side = LEFT)
+        #return book
+        self.icongive=PhotoImage(file = 'icons/returnbook.png')
+        self.btngive = Button(topFrame, text = 'Return Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40)
+        self.btngive.pack(side = LEFT)
 
 
         #tabs
