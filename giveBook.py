@@ -71,7 +71,7 @@ class GiveBook(Toplevel):
     def giveBook(self):
         book_name = self.book_name.get()
         member_name = self.member_name.get()
-        date = datetime.date.today().strftime('%Y-%m-%d')
+        date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
    
         if (book_name and member_name !=''):
             book_id = book_name.split('-')[0]

@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import PhotoImage
 from tkinter import messagebox
 import sqlite3
-import addBook, addMember, giveBook
+import addBook, addMember, giveBook, returnBook
 from giveBook import *
 
 
@@ -126,18 +126,20 @@ class Main(object):
 
 
         #add book
-        self.iconbook=PhotoImage(file='icons/addbook.png')
-        self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 100, height = 40, command = self.addBook)
+        self.iconbook = PhotoImage(file='icons/addbook.png')
+        self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 150, height = 40, command = self.addBook)
         self.btnbook.pack(side = LEFT, padx = 10)
         #add member
         self.iconmember = PhotoImage(file = 'icons/users.png')
-        self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 100, height = 40, command = self.addMember)
-        self.btnmember. configure(image = self.iconmember, compound = LEFT)
+        self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 150, height = 40, command = self.addMember)
+        self.btnmember.configure(image = self.iconmember, compound = LEFT)
         self.btnmember.pack(side = LEFT)
         #return book
-        self.icongive=PhotoImage(file = 'icons/returnbook.png')
-        self.btngive = Button(topFrame, text = 'Return Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 100, height = 40)
+        self.icongive = PhotoImage(file = 'icons/returnbook.png')
+        self.btngive = Button(topFrame, text = 'Return Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 150, height = 40, command = self.returnBook)
+        self.btngive.configure(image = self.icongive, compound = LEFT)
         self.btngive.pack(side = LEFT)
+       
 
 
         #tabs
@@ -179,6 +181,9 @@ class Main(object):
 
     def addMember(self):
         member = addMember.AddMember()
+
+    def returnBook(self):
+        ret = returnBook.ReturnBook()
 
     def searchBooks(self):
         value = self.ent_search.get()
