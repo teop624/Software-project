@@ -39,7 +39,7 @@ class Main(object):
                     return
                 value = str(self.list_books.get(self.list_books.curselection()))
                 id = value.split('-')[0]
-                book = cur.execute("SELECT * FROM books WHERE bookID = ?",(id))
+                book = cur.execute("SELECT * FROM books WHERE bookID = ?",(id,))
                 book_info = book.fetchall()
                 print(book_info)
                 self.list_details.delete(0,END)
@@ -59,7 +59,8 @@ class Main(object):
                         member_id = borrow_info[0]
                         member_info = cur.execute("SELECT memberName FROM members WHERE memberID = ?", (member_id,)).fetchone()
                         self.list_details.insert(5, "Borrowed by " + member_info[0])
-                        return
+                    else:
+                        self.list_details.insert(5, "Unavailible")
 
             def doubleClick(evt):
                 global given_id
