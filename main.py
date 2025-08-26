@@ -55,8 +55,10 @@ class Main(object):
                     self.list_details.insert(4,"Not Available")
                     self.list_details.itemconfig(4, bg = 'white', fg = 'red')
                     borrow_info = cur.execute("SELECT * FROM borrows WHERE bookID = ?", (id,)).fetchone()
+                    print("borrow info ", borrow_info)
                     if borrow_info:
-                        member_id = borrow_info[0]
+                        print("tt ", borrow_info)
+                        member_id = borrow_info[2]
                         member_info = cur.execute("SELECT memberName FROM members WHERE memberID = ?", (member_id,)).fetchone()
                         self.list_details.insert(5, "Borrowed by " + member_info[0])
                     else:

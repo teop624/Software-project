@@ -52,12 +52,12 @@ class GiveBook(Toplevel):
         self.combo_member['values'] = member_list
         self.combo_member.place(x = 150, y = 85)
         #date
-        self.date = StringVar()
-        self.lbl_date = Label(self.bottomFrame, text = 'Date Borrowed', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
-        self.lbl_date.place(x = 40, y = 120)
-        self.combo_date = ttk.Combobox(self.bottomFrame, textvariable = self.date)
-        self.combo_date['values'] = member_list
-        self.combo_date.place(x = 150, y = 125)
+        #self.date = StringVar()
+        #self.lbl_date = Label(self.bottomFrame, text = 'Date Borrowed', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        #self.lbl_date.place(x = 40, y = 120)
+        #self.combo_date = ttk.Combobox(self.bottomFrame, textvariable = self.date)
+        #self.combo_date['values'] = member_list
+        #self.combo_date.place(x = 150, y = 125)
         #button
         button = Button(self.bottomFrame, text = 'Give Book', command = self.giveBook)
         button.place(x = 150, y = 160)
@@ -71,6 +71,7 @@ class GiveBook(Toplevel):
     def giveBook(self):
         book_name = self.book_name.get()
         member_name = self.member_name.get()
+        date = datetime.date.today().strftime('%Y-%m-%d')
    
         if (book_name and member_name !=''):
             book_id = book_name.split('-')[0]
@@ -80,8 +81,10 @@ class GiveBook(Toplevel):
             if book_status == 1:
                 messagebox.showerror("Error", "Book is already issued", icon = 'warning')
                 return
-            date = datetime.date.today().strftime('%Y-%m-%d')
+            #date = datetime.date.today().strftime('%Y-%m-%d')
             query = "INSERT INTO 'borrows' (bookID, memberID, borrowDate) VALUES(?,?,?)"
+            cur.execute(query, (book_id, member_id, date))
+            con.commit()
             cur.execute("UPDATE books SET status =? WHERE bookID =?", (1, self.book_id))
             con.commit()
             messagebox.showinfo('Success', 'Book Borrowed Successfully', icon = 'info')
@@ -92,7 +95,7 @@ class GiveBook(Toplevel):
             messagebox.showerror("Error", "Please fill all the details", icon = 'warning')
     
    
-    def update_availability(self, event=None):
+    def update_availability(self, even = None):
         selected_book_string = self.combo_name.get()
         if selected_book_string:
             book_id = int(selected_book_string.split('-')[0])
@@ -101,6 +104,6 @@ class GiveBook(Toplevel):
             book_status = cur.fetchone()[0]
         
             if book_status == 0:
-                self.lbl_availability.config(text="Available", fg="green")
+                self.lbl_availability.config(text = "Available", fg = "green")
             else:
-                self.lbl_availability.config(text="Not Available", fg="red")
+                self.lbl_availability.config(text = "Not Available", fg = "red")
