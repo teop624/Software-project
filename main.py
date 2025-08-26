@@ -54,7 +54,12 @@ class Main(object):
                 else:
                     self.list_details.insert(4,"Not Available")
                     self.list_details.itemconfig(4, bg = 'white', fg = 'red')
-                    self.list_details.insert(5, "Borrowed by " + str(book_info[0][6]))
+                    borrow_info = cur.execute("SELECT * FROM borrows WHERE bookID = ?", (id,)).fetchone()
+                    if borrow_info:
+                        member_id = borrow_info[0]
+                        member_info = cur.execute("SELECT memberName FROM members WHERE memberID = ?", (member_id,)).fetchone()
+                        self.list_details.insert(5, "Borrowed by " + member_info[0])
+                        return
 
             def doubleClick(evt):
                 global given_id
