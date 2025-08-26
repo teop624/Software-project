@@ -2,8 +2,15 @@ from tkinter import *
 from tkinter import Toplevel
 from tkinter import messagebox
 import sqlite3
+import hashlib
 con = sqlite3.connect('Libarary.db')
 cur = con.cursor()
+
+def encrypt_data(data, key):
+    encrypted = ''
+    for char in data:
+        encrypted += chr(ord(char) ^ key)
+    return encrypted
 
 class AddMember(Toplevel):
     def __init__(self):
@@ -44,6 +51,30 @@ class AddMember(Toplevel):
         self.ent_phone.insert(0, 'Enter Phone No.')
         self.ent_phone.place(x = 150, y = 125)
 
+        #username
+        self.lbl_username = Label(self.bottomFrame, text = 'Username', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_username.place(x = 40, y = 160)
+        self.ent_username = Entry(self.bottomFrame, width = 30, bd = 4)
+        self.ent_username.place(x = 150, y = 165)
+
+        #password
+        self.lbl_password = Label(self.bottomFrame, text = 'Password', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_password.place(x = 40, y = 200)
+        self.ent_password = Entry(self.bottomFrame, width = 30, bd = 4, show='*')
+        self.ent_password.place(x = 150, y = 205)
+
+        #employee check
+        self.is_employee = IntVar()
+        self.check_employee = Checkbutton(self.bottomFrame, text = 'Is Employee', variable = self.is_employee, bg = '#fcc324', fg = 'white', font = 'arial 12 bold', state = DISABLED)
+        self.check_employee.place(x = 150, y = 240)
+
+        #code
+        self.lbl_code = Label(self.bottomFrame, text = 'Employee Code', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
+        self.lbl_code.place(x = 40, y = 280)
+        self.ent_code = Entry(self.bottomFrame, show='*', width=30, bd=4)
+        self.ent_code.place(x = 150, y = 285)
+        self.ent_code.bind('<KeyRelease>', self.check_employee_code)
+
         #button
         button = Button(self.bottomFrame, text = 'Add Member', command = self.addMember)
         button.place(x = 270, y = 120)
@@ -52,8 +83,22 @@ class AddMember(Toplevel):
         name = self.ent_name.get()
         email = self.ent_email.get()
         phone = self.ent_phone.get()
+        username = self.ent_username.get()
+        password = self.ent_password.get()
+        employee = self.is_employee.get()
 
-        if name and email and phone !='':
+        if name and email and phone and username and password !='':
+            if cur.execute("SELECT username FROM members WHERE username = ?", (username,)).fetchone():
+            messagebox.showerror("Error", "Username already exists", icon='warning')
+
+            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            username_hash = hashlib.sha256(username.encode()).hexdigest()
+            encryption_key = 123
+            encrypted_name = encrypt_data(name, encryption_key)
+            encrypted_email = encrypt_data(email, encryption_key)
+            encrypted_phone = encrypt_data(phone, encryption_key)
+
+            
             try:
                 query = "INSERT INTO 'members' (memberName, memberEmail, memberPhone) VALUES(?,?,?)"
                 cur.execute(query, (name, email, phone))
@@ -62,9 +107,14 @@ class AddMember(Toplevel):
 
             except:
                 messagebox.showerror('Error', 'Cannot add data to Database', icon = 'error')
-
+            return
 
         else:
             messagebox.showerror('Error', 'Please fill all the fields', icon = 'warning')
         
-                
+    def check_employee_code(self, evt):
+        if self.entry_code.get() == 'emp123': 
+            self.check_employee.config(state=NORMAL)
+        else:
+            self.check_employee.config(state=DISABLED)
+            self.is_employee.set(0)        
