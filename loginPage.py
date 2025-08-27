@@ -77,18 +77,22 @@ class LoginPage(Toplevel):
         user = cur.execute("SELECT employee, password, memberName FROM members WHERE username = ?", (username_hash,)).fetchone()
         
         if user and user[0] == 1 and user[1] == password_hash:
-            messagebox.showinfo("Success", "Login successful!", icon = 'info')
-            self.master.destroy()
+            name = decrypt_data(user[2], 123)
+            messagebox.showinfo("Success", "Welcome " + name + "!", icon = 'info')
+            self.master.withdraw()
+            self.main_window = Main(self.master, self, name)
             
-            #start main
-            main_root = Tk()
-            Main(main_root, user[2])
-            main_root.mainloop()
+
             
         else:
             messagebox.showerror("Error", "Invalid username or password or you are not an employee.", icon = 'warning')
 
 if __name__ == '__main__':
     root = Tk()
+    root.title("Library Management System")
+    root.geometry("1350x750+350+200")
+    root.withdraw()
+    app_icon = PhotoImage(file = 'icons/book.png')
+    root.iconphoto(False, app_icon)
     login_app = LoginPage(root)
     root.mainloop()

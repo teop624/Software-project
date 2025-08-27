@@ -23,9 +23,12 @@ def encrypt_data(data, key):
         encrypted += chr(ord(char) ^ key)
     return encrypted
 
-class Main(object):
-    def __init__(self, master, member_name = None):
+class Main(Toplevel):
+    def __init__(self, master, login_window, member_name = None):
         self.master = master
+        self.login_window = login_window
+        self.member_name = member_name
+        self.master.deiconify()
 
         def displayStatistics(evt):
             count_books = cur.execute("SELECT count(bookID) FROM books").fetchall()
@@ -242,9 +245,8 @@ class Main(object):
                 count += 1
     
     def logout(self):
-        for widget in self.master.winfo_children():
-            widget.destroy()
-        loginPage.LoginPage(self.master)
+        self.master.withdraw()
+        self.login_window.deiconify()
         messagebox.showinfo("Logout", "You have been logged out.", icon = 'info')
         
 
