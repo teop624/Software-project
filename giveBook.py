@@ -73,7 +73,7 @@ class GiveBook(Toplevel):
         member_name = self.member_name.get()
         date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
    
-        if (book_name !='' and member_name !=''):
+        if book_name !='' and member_name !='':
             book_id = book_name.split('-')[0]
             member_id = member_name.split('-')[0]
             cur.execute("SELECT status FROM books WHERE bookID = ?", (book_id,))
@@ -81,7 +81,7 @@ class GiveBook(Toplevel):
             if book_status == 1:
                 messagebox.showerror("Error", "Book is already issued", icon = 'warning')
                 return
-            #date = datetime.date.today().strftime('%Y-%m-%d')
+            date = datetime.date.today().strftime('%Y-%m-%d')
             query = "INSERT INTO 'borrows' (bookID, memberID, borrowDate) VALUES(?,?,?)"
             cur.execute(query, (book_id, member_id, date))
             con.commit()
@@ -95,7 +95,7 @@ class GiveBook(Toplevel):
             messagebox.showerror("Error", "Please fill all the details", icon = 'warning')
     
    
-    def update_availability(self, even = None):
+    def update_availability(self, evt = None):
         selected_book_string = self.combo_name.get()
         if selected_book_string:
             book_id = int(selected_book_string.split('-')[0])
