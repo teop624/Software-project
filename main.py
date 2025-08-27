@@ -242,7 +242,9 @@ class Main(object):
                 count += 1
     
     def logout(self):
-        self.master.destroy()
+        for widget in self.master.winfo_children():
+            widget.destroy()
+        loginPage.LoginPage(self.master)
         messagebox.showinfo("Logout", "You have been logged out.", icon = 'info')
         
 
