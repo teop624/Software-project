@@ -87,7 +87,7 @@ class AddMember(Toplevel):
         password = self.ent_password.get()
         employee = self.is_employee.get()
 
-        if name and email and phone and username and password !='':
+        if name !='' and email !='' and phone !='' and username !='' and password !='':
             if cur.execute("SELECT username FROM members WHERE username = ?", (username,)).fetchone():
                 messagebox.showerror("Error", "Username already exists", icon = 'warning')
                 return
@@ -101,8 +101,8 @@ class AddMember(Toplevel):
 
             
             try:
-                query = "INSERT INTO 'members' (memberName, memberEmail, memberPhone) VALUES(?,?,?)"
-                cur.execute(query, (name, email, phone))
+                query = "INSERT INTO 'members' (memberName, memberEmail, memberPhone, employee, password, username) VALUES(?,?,?,?,?,?)"
+                cur.execute(query, (encrypted_name, encrypted_email, encrypted_phone, employee, password_hash, username_hash))
                 con.commit()
                 messagebox.showinfo('Success', 'Member added successfully', icon = 'info')
 

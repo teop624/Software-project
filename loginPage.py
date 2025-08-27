@@ -66,10 +66,11 @@ class LoginPage(Toplevel):
             messagebox.showerror("Error", "Please enter username and password.", icon = 'warning')
             return
 
-        passw = hashlib.sha256(password.encode()).hexdigest()
-        user = cur.execute("SELECT employee, password, memberName FROM members WHERE username = ?", (username,)).fetchone()
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        username_hash = hashlib.sha256(username.encode()).hexdigest()
+        user = cur.execute("SELECT employee, password, memberName FROM members WHERE username = ?", (username_hash,)).fetchone()
         
-        if user and user[0] == 1 and user[1] == passw:
+        if user and user[0] == 1 and user[1] == password_hash:
             messagebox.showinfo("Success", "Login successful!", icon = 'info')
             self.master.destroy()
             

@@ -59,7 +59,7 @@ class AddBook(Toplevel):
         page = self.ent_page.get()
         year = self.ent_year.get()
 
-        if name and author and page and year !='':
+        if name !='' and author !='' and page !='' and year !='':
             try:
                 query = "INSERT INTO 'books' (bookName, bookAuthor, pageCount, year) VALUES(?,?,?,?)"
                 cur.execute(query, (name, author, page, year))

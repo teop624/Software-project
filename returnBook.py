@@ -48,7 +48,7 @@ class ReturnBook(Toplevel):
        
        #button
         button = Button(self.topFrame, text = 'Return Book', command = self.returnBook)
-        button.place(x = 150, y= 120)
+        button.place(x = 150, y = 120)
 
         #member name
         self.member_name = StringVar()

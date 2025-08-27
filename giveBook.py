@@ -73,7 +73,7 @@ class GiveBook(Toplevel):
         member_name = self.member_name.get()
         date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
    
-        if (book_name and member_name !=''):
+        if (book_name !='' and member_name !=''):
             book_id = book_name.split('-')[0]
             member_id = member_name.split('-')[0]
             cur.execute("SELECT status FROM books WHERE bookID = ?", (book_id,))
