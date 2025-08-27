@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import Toplevel
 from tkinter import messagebox
 import sqlite3
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
+from connection import con, cur
+
 
 class AddBook(Toplevel):
     def __init__(self):

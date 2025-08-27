@@ -3,9 +3,8 @@ from tkinter import messagebox
 import sqlite3
 import hashlib
 from main import Main 
+from connection import con, cur
 
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
 
 def decrypt_data(data, key):
     decrypted = ''

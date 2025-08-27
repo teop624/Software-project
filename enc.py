@@ -1,7 +1,7 @@
 import hashlib
 import sqlite3
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
+from connection import con, cur
+
 
 def encrypt_data(data, key):
     encrypted = ''

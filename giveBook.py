@@ -4,8 +4,19 @@ from tkinter import messagebox
 from tkinter import ttk
 import datetime
 import sqlite3
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
+from connection import con, cur
+
+def decrypt_data(data, key):
+    decrypted = ''
+    for char in data:
+        decrypted += chr(ord(char) ^ key)
+    return decrypted
+
+def encrypt_data(data, key):
+    encrypted = ''
+    for char in data:
+        encrypted += chr(ord(char) ^ key)
+    return encrypted
 
 class GiveBook(Toplevel):
     def __init__(self, book_id):
@@ -70,12 +81,14 @@ class GiveBook(Toplevel):
 
     def giveBook(self):
         book_name = self.book_name.get()
-        member_name = self.member_name.get()
+        member_nameN = self.member_name.get()
         date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
+
+        name = decrypt_data(member_nameN[1], 123)
    
-        if book_name !='' and member_name !='':
+        if book_name !='' and member_nameN !='':
             book_id = book_name.split('-')[0]
-            member_id = member_name.split('-')[0]
+            member_id = name.split('-')[0]
             cur.execute("SELECT status FROM books WHERE bookID = ?", (book_id,))
             book_status = cur.fetchone()[0]
             if book_status == 1:

@@ -4,9 +4,8 @@ from tkinter import messagebox
 from tkinter import ttk
 import sqlite3
 import datetime
+from connection import con, cur
 
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
 
 class ReturnBook(Toplevel):
     def __init__(self):

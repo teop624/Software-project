@@ -6,10 +6,8 @@ import sqlite3
 import addBook, addMember, giveBook, returnBook
 from giveBook import *
 import hashlib
+from connection import con, cur
 
-
-con = sqlite3.connect('Libarary.db')
-cur = con.cursor()
 
 def decrypt_data(data, key):
     decrypted = ''
