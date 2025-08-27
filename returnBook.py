@@ -81,7 +81,6 @@ class ReturnBook(Toplevel):
 
         try:
             cur.execute("UPDATE books SET status = ? WHERE bookID = ?", (0, book_id,))
-            con.commit()
             cur.execute("UPDATE borrows SET returnDate = ? WHERE bookID = ?", (return_date, book_id,))
             con.commit()
             messagebox.showinfo("Success", "Book Returned Successfully", icon = 'info')

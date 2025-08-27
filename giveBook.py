@@ -97,7 +97,6 @@ class GiveBook(Toplevel):
             date = datetime.date.today().strftime('%Y-%m-%d')
             query = "INSERT INTO 'borrows' (bookID, memberID, borrowDate) VALUES(?,?,?)"
             cur.execute(query, (book_id, member_id, date))
-            con.commit()
             cur.execute("UPDATE books SET status =? WHERE bookID =?", (1, self.book_id))
             con.commit()
             messagebox.showinfo('Success', 'Book Borrowed Successfully', icon = 'info')
