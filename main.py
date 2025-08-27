@@ -24,7 +24,7 @@ def encrypt_data(data, key):
     return encrypted
 
 class Main(object):
-    def __init__(self,master):
+    def __init__(self, master, member_name = None):
         self.master = master
 
         def displayStatistics(evt):

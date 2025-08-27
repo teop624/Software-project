@@ -44,13 +44,19 @@ class LoginPage(Toplevel):
         self.lbl_username = Label(self.bottomFrame, text = 'Username', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_username.place(x = 500, y = 200)
         self.ent_username = Entry(self.bottomFrame, width = 30, bd = 4)
-        self.ent_username.insert(0, 'Enter Username')
+        #self.ent_username.insert(0, 'Enter Username')
+
+        self.ent_username.insert(0, 'greg')
+
         self.ent_username.place(x = 550, y = 305)
         #password
         self.lbl_password = Label(self.bottomFrame, text = 'Password', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_password.place(x = 400, y = 350)
         self.ent_password = Entry(self.bottomFrame, show = '*', width = 30, bd = 4)
-        self.ent_password.insert(0, 'Enter Password')
+        #self.ent_password.insert(0, 'Enter Password')
+
+        self.ent_password.insert(0, 'paul')
+
         self.ent_password.place(x = 550, y = 355)
         
         #button
