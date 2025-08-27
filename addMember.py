@@ -60,7 +60,7 @@ class AddMember(Toplevel):
         #password
         self.lbl_password = Label(self.bottomFrame, text = 'Password', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_password.place(x = 40, y = 200)
-        self.ent_password = Entry(self.bottomFrame, width = 30, bd = 4, show='*')
+        self.ent_password = Entry(self.bottomFrame, width = 30, bd = 4, show = '*')
         self.ent_password.place(x = 150, y = 205)
 
         #employee check
@@ -71,7 +71,7 @@ class AddMember(Toplevel):
         #code
         self.lbl_code = Label(self.bottomFrame, text = 'Employee Code', font = 'arial 15 bold', bg = '#fcc324', fg = 'white')
         self.lbl_code.place(x = 40, y = 280)
-        self.ent_code = Entry(self.bottomFrame, show='*', width=30, bd=4)
+        self.ent_code = Entry(self.bottomFrame, show = '*', width = 30, bd = 4)
         self.ent_code.place(x = 150, y = 285)
         self.ent_code.bind('<KeyRelease>', self.check_employee_code)
 
@@ -89,7 +89,8 @@ class AddMember(Toplevel):
 
         if name and email and phone and username and password !='':
             if cur.execute("SELECT username FROM members WHERE username = ?", (username,)).fetchone():
-            messagebox.showerror("Error", "Username already exists", icon='warning')
+                messagebox.showerror("Error", "Username already exists", icon = 'warning')
+                return
 
             password_hash = hashlib.sha256(password.encode()).hexdigest()
             username_hash = hashlib.sha256(username.encode()).hexdigest()
@@ -113,8 +114,8 @@ class AddMember(Toplevel):
             messagebox.showerror('Error', 'Please fill all the fields', icon = 'warning')
         
     def check_employee_code(self, evt):
-        if self.entry_code.get() == 'emp123': 
-            self.check_employee.config(state=NORMAL)
+        if self.ent_code.get() == 'emp123': 
+            self.check_employee.config(state = NORMAL)
         else:
-            self.check_employee.config(state=DISABLED)
+            self.check_employee.config(state = DISABLED)
             self.is_employee.set(0)        

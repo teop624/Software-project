@@ -3,12 +3,25 @@ from tkinter import ttk
 from tkinter import PhotoImage
 from tkinter import messagebox
 import sqlite3
-import addBook, addMember, giveBook, returnBook, loginPage
+import addBook, addMember, giveBook, returnBook
 from giveBook import *
+import hashlib
 
 
 con = sqlite3.connect('Libarary.db')
 cur = con.cursor()
+
+def decrypt_data(data, key):
+    decrypted = ''
+    for char in data:
+        decrypted += chr(ord(char) ^ key)
+    return decrypted
+
+def encrypt_data(data, key):
+    encrypted = ''
+    for char in data:
+        encrypted += chr(ord(char) ^ key)
+    return encrypted
 
 class Main(object):
     def __init__(self,master):
@@ -76,7 +89,7 @@ class Main(object):
             self.list_books.bind('<Double-Button-1>', doubleClick)
 
         #frames
-        mainFrame=Frame(self.master)
+        mainFrame = Frame(self.master)
         mainFrame.pack()
         #top
         topFrame = Frame(mainFrame, width = 1350, height = 70, bg = '#f8f8f8', padx = 20, relief = SUNKEN, borderwidth = 2)
@@ -139,6 +152,11 @@ class Main(object):
         self.btngive = Button(topFrame, text = 'Return Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 150, height = 40, command = self.returnBook)
         self.btngive.configure(image = self.icongive, compound = LEFT)
         self.btngive.pack(side = LEFT)
+        #logout
+        self.iconlogout = PhotoImage(file = 'icons/logout.png')
+        self.btnlogout = Button(topFrame, text = 'Logout', font = 'arial 12 bold', padx = 10, image = self.iconlogout, compound = LEFT, width = 150, height = 40, command = self.logout)
+        self.btnlogout.configure(image = self.iconlogout, compound = LEFT)
+        self.btnlogout.pack(side = RIGHT, padx = 10)
        
 
 
@@ -222,8 +240,13 @@ class Main(object):
             for book in taken_books:
                 self.list_books.insert(count, str(book[0]) + "-" + book[1])
                 count += 1
-    #def open_give_book(self):
-     #   GiveBook()
+    
+    def logout(self):
+        self.master.destroy()
+        messagebox.showinfo("Logout", "You have been logged out.", icon = 'info')
+        
+
+        
 
 
 def main():

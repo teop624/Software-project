@@ -77,7 +77,7 @@ class ReturnBook(Toplevel):
         return_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
 
         if not book_name or not member_name:
-            messagebox.showerror("Error", "Please select a book and member.", icon='warning')
+            messagebox.showerror("Error", "Please select a book and member.", icon = 'warning')
             return
 
         try:
