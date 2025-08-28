@@ -142,7 +142,7 @@ class Main(Toplevel):
         #add book
         self.iconbook = PhotoImage(file='icons/addbook.png')
         self.btnbook = Button(topFrame, text = 'Add Book', image = self.iconbook, compound = LEFT, font = 'arial 12 bold', width = 150, height = 40, command = self.addBook)
-        self.btnbook.pack(side = LEFT, padx = 10)
+        self.btnbook.pack(side = LEFT)
         #add member
         self.iconmember = PhotoImage(file = 'icons/users.png')
         self.btnmember = Button(topFrame, text = 'Add Member', font = 'arial 12 bold', padx = 10, width = 150, height = 40, command = self.addMember)
@@ -162,8 +162,8 @@ class Main(Toplevel):
         self.iconlogout = PhotoImage(file = 'icons/logout.png')
         self.btnlogout = Button(topFrame, text = 'Logout', font = 'arial 12 bold', padx = 10, image = self.iconlogout, compound = LEFT, width = 150, height = 40, command = self.logout)
         self.btnlogout.configure(image = self.iconlogout, compound = LEFT)
-        self.btnlogout.pack(side = RIGHT, padx = 10)
-       
+        self.btnlogout.pack(side = RIGHT)
+
 
 
         #tabs
