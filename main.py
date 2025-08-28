@@ -153,6 +153,11 @@ class Main(Toplevel):
         self.btngive = Button(topFrame, text = 'Return Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 150, height = 40, command = self.returnBook)
         self.btngive.configure(image = self.icongive, compound = LEFT)
         self.btngive.pack(side = LEFT)
+        #request. book
+        self.icongive = PhotoImage(file = 'icons/givebook.png')
+        self.btngive = Button(topFrame, text = 'Request Book', font = 'arial 12 bold', padx = 10, image = self.icongive, compound = LEFT, width = 150, height = 40, command = self.requestBook)
+        self.btngive.configure(image = self.icongive, compound = LEFT)
+        self.btngive.pack(side = LEFT)
         #logout
         self.iconlogout = PhotoImage(file = 'icons/logout.png')
         self.btnlogout = Button(topFrame, text = 'Logout', font = 'arial 12 bold', padx = 10, image = self.iconlogout, compound = LEFT, width = 150, height = 40, command = self.logout)
@@ -246,6 +251,9 @@ class Main(Toplevel):
         self.master.withdraw()
         self.login_window.deiconify()
         messagebox.showinfo("Logout", "You have been logged out.", icon = 'info')
+    
+    def requestBook(self):
+        pass
         
 
         
